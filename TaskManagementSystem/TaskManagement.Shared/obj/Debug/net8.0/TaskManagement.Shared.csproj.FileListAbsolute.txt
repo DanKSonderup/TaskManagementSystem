@@ -1,0 +1,12 @@
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.Shared\bin\Debug\net8.0\TaskManagement.Shared.deps.json
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.Shared\bin\Debug\net8.0\TaskManagement.Shared.dll
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.Shared\bin\Debug\net8.0\TaskManagement.Shared.pdb
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.Shared\obj\Debug\net8.0\TaskManagement.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.Shared\obj\Debug\net8.0\TaskManagement.Shared.AssemblyInfoInputs.cache
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.Shared\obj\Debug\net8.0\TaskManagement.Shared.AssemblyInfo.cs
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.Shared\obj\Debug\net8.0\TaskManagement.Shared.csproj.CoreCompileInputs.cache
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.Shared\obj\Debug\net8.0\TaskManagement.Shared.sourcelink.json
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.Shared\obj\Debug\net8.0\TaskManagement.Shared.dll
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.Shared\obj\Debug\net8.0\refint\TaskManagement.Shared.dll
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.Shared\obj\Debug\net8.0\TaskManagement.Shared.pdb
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.Shared\obj\Debug\net8.0\ref\TaskManagement.Shared.dll

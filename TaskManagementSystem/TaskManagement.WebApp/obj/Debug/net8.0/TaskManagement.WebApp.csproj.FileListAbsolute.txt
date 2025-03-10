@@ -1,0 +1,9 @@
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\TaskManagement.WebApp.csproj.AssemblyReference.cache
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\TaskManagement.WebApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\TaskManagement.WebApp.AssemblyInfoInputs.cache
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\TaskManagement.WebApp.AssemblyInfo.cs
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\TaskManagement.WebApp.csproj.CoreCompileInputs.cache
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\TaskManagement.WebApp.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\TaskManagement.WebApp.RazorAssemblyInfo.cache
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\TaskManagement.WebApp.RazorAssemblyInfo.cs
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\TaskManagement.WebApp.sourcelink.json
