@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35219.272
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagement.WebApp", "TaskManagement.WebApp\TaskManagement.WebApp.csproj", "{8D750807-CC17-4A53-83C6-7C2D72BC92FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManagement.WebApp", "TaskManagement.WebApp\TaskManagement.WebApp.csproj", "{8D750807-CC17-4A53-83C6-7C2D72BC92FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagement.Application", "TaskManagement.Application\TaskManagement.Application.csproj", "{546856D6-8E1C-4A3C-A3F7-3F45F493F226}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManagement.Application", "TaskManagement.Application\TaskManagement.Application.csproj", "{546856D6-8E1C-4A3C-A3F7-3F45F493F226}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagement.Domain", "TaskManagement.Domain\TaskManagement.Domain.csproj", "{C419867F-2B81-4179-BD23-F4235E9494E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManagement.Domain", "TaskManagement.Domain\TaskManagement.Domain.csproj", "{C419867F-2B81-4179-BD23-F4235E9494E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagement.Infrastructure", "TaskManagement.Infrastructure\TaskManagement.Infrastructure.csproj", "{A70B1C95-ACD4-4CF0-B7EB-08A9F2985813}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManagement.Infrastructure", "TaskManagement.Infrastructure\TaskManagement.Infrastructure.csproj", "{A70B1C95-ACD4-4CF0-B7EB-08A9F2985813}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagement.Shared", "TaskManagement.Shared\TaskManagement.Shared.csproj", "{BCFE3443-6B74-4E8B-B7DB-D2858281E739}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManagement.Shared", "TaskManagement.Shared\TaskManagement.Shared.csproj", "{BCFE3443-6B74-4E8B-B7DB-D2858281E739}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

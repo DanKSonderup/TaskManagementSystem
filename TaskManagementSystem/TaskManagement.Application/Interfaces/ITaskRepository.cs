@@ -9,9 +9,10 @@ namespace TaskManagement.Application.Interfaces
 {
     public interface ITaskRepository
     {
-        Task AddAsync(ProjectTask task);
-        Task<ProjectTask> GetByIdAsync(Guid taskId);
-        Task<IEnumerable<ProjectTask>> GetAllAsync();
-        Task DeleteAsync(ProjectTask task);
+        public Task AddAsync(ProjectTask task);
+        public Task<ProjectTask> GetByIdAsync(Guid taskId);
+        public Task<ProjectTask> UpdateAsync(ProjectTask task);
+        public Task<IEnumerable<ProjectTask>> GetAllAsync();
+        public Task DeleteAsync(ProjectTask task);
     }
 }

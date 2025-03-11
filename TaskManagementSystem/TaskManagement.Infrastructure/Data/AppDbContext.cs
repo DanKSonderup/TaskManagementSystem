@@ -17,7 +17,29 @@ namespace TaskManagement.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<ProjectTask>().HasData(
+                new ProjectTask
+                {
+                    Id = Guid.Parse("11111111-1111-1111-1111-111111111111"),
+                    Title = "Create Database",
+                    Description = "Set up initial database",
+                },
+                new ProjectTask
+                {
+                    Id = Guid.Parse("22222222-2222-2222-2222-222222222222"),
+                    Title = "Implement CRUD",
+                    Description = "Implement CRUD operations",
+                },
+                new ProjectTask
+                {
+                    Id = Guid.Parse("33333333-3333-3333-3333-333333333333"),
+                    Title = "Test API",
+                    Description = "Test all API endpoints",
+                }
+            );
         }
     }
 }

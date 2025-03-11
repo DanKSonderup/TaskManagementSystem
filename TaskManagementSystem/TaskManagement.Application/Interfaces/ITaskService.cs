@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManagement.Domain.Entities;
+using TaskManagement.Domain.Enums;
 
 namespace TaskManagement.Application.Interfaces
 {
@@ -12,7 +13,7 @@ namespace TaskManagement.Application.Interfaces
         Task<Guid> CreateTaskAsync(string title, string description);
         Task<IEnumerable<ProjectTask>> GetAllTasksAsync();
         Task<ProjectTask?> GetTaskByIdAsync(Guid taskId);
-        Task<bool> UpdateTaskAsync(Guid taskId, string title, string description, bool isCompleted);
+        Task<bool> UpdateTaskAsync(Guid taskId, string title, string description, TaskState status);
         Task<bool> DeleteTaskAsync(Guid taskId);
     }
 }

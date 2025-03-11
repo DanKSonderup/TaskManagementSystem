@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using System;
+using TaskManagement.Application.Features.Tasks;
+using TaskManagement.Application.Interfaces;
+using TaskManagement.Infrastructure.Data;
+using TaskManagement.Infrastructure.Repositories;
 
 namespace TaskManagement.WebApp
 {
@@ -9,42 +13,45 @@ namespace TaskManagement.WebApp
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Add services to the container
             builder.Services.AddRazorPages();
+            builder.Services.AddControllers();
 
-            // Services - Application
+            // Register Application Layer Services
             builder.Services.AddScoped<ITaskService, TaskService>();
 
-
-            // Services - Infrastructure
+            // Register Infrastructure Layer Repositories
             builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+
+            // Configure EF Core with SQL Server
             builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-            // Add FluentValidation
-            builder.Services.AddValidatorsFromAssemblyContaining<CreateTaskValidator>();
-
-            // Add MediatR for CQRS
-            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
-
+                options.UseSqlServer(
+                    builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+            using (var scope = app.Services.CreateScope())
             {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                dbContext.Database.Migrate(); // Applies any pending migrations
             }
+
+            app.UseExceptionHandler("/Error");
+            app.UseHsts(); // HTTP Strict Transport Security
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseAuthorization();
 
+            // Map Controllers and Razor Pages
+            app.MapControllers();
+
+            app.MapGet("/", async context =>
+            {
+                context.Response.Redirect("/Tasks");
+            });
             app.MapRazorPages();
 
             app.Run();

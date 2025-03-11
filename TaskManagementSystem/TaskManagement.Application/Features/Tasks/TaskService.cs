@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskManagement.Application.Interfaces;
 using TaskManagement.Domain.Entities;
+using TaskManagement.Domain.Enums;
 
 namespace TaskManagement.Application.Features.Tasks
 {
@@ -47,15 +48,16 @@ namespace TaskManagement.Application.Features.Tasks
             return await _taskRepository.GetByIdAsync(taskId);
         }
 
-        public async Task<bool> UpdateTaskAsync(Guid taskId, string title, string description, bool isCompleted)
+        public async Task<bool> UpdateTaskAsync(Guid taskId, string title, string description, TaskState status)
         {
             var projectTask = await _taskRepository.GetByIdAsync(taskId);
             if (projectTask == null)
             {
                 return false;
             }
-            projectTask.Update(title, description, isCompleted);
-            await _taskRepository.AddAsync(projectTask);
+            projectTask.Update(title, description, status);
+
+            await _taskRepository.UpdateAsync(projectTask);
             return true;
         }
     }

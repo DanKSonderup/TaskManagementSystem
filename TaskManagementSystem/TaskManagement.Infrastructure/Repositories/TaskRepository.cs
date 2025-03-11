@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManagement.Application.Interfaces;
 using TaskManagement.Domain.Entities;
 using TaskManagement.Infrastructure.Data;
 
@@ -38,6 +39,13 @@ namespace TaskManagement.Infrastructure.Repositories
         {
             _context.ProjectTasks.Remove(task);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<ProjectTask> UpdateAsync(ProjectTask task)
+        {
+            _context.ProjectTasks.Update(task);
+            await _context.SaveChangesAsync();
+            return task;
         }
     }
 }

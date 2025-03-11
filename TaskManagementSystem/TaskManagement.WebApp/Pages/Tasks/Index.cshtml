@@ -1,0 +1,74 @@
+﻿@page
+@model TaskManagement.WebApp.Pages.Tasks.IndexModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Board</title>
+</head>
+<body class="container mt-5">
+
+    <h1 class="text-center mb-4">Task Management</h1>
+
+
+    <div class="card p-4 mb-4">
+        <h2 class="h4">Create a Task</h2>
+        <form method="post">
+            <div class="mb-2">
+                <input type="text" asp-for="NewTask.Title" class="form-control" placeholder="Task Title" required>
+            </div>
+            <div class="mb-2">
+                <input type="text" asp-for="NewTask.Description" class="form-control" placeholder="Task Description" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Task</button>
+        </form>
+    </div>
+
+
+    <div class="row">
+        @foreach (var status in Model.StatusOptions)
+        {
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h5>@status</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            @foreach (var task in Model.Tasks.Where(t => t.State == status))
+                            {
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>@task.Title</strong><br>
+                                        <small>@task.Description</small>
+                                    </div>
+                                    <div>
+                                        <form method="post" asp-page-handler="UpdateStatus" class="d-inline">
+                                            <input type="hidden" name="taskId" value="@task.Id">
+                                            <select name="newStatus" class="form-select form-select-sm" onchange="this.form.submit()">
+                                                @foreach (var option in Model.StatusOptions)
+                                                {
+                                                    <option value="@option" selected="@(task.State == option ? "selected" : null)">
+                                                        @option
+                                                    </option>
+                                                }
+                                            </select>
+                                        </form>
+                                        <form method="post" asp-page-handler="Delete" class="d-inline">
+                                            <input type="hidden" name="taskId" value="@task.Id">
+                                            <button type="submit" class="btn btn-danger btn-sm ms-2">Delete</button>
+                                        </form>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</body>
+</html>
