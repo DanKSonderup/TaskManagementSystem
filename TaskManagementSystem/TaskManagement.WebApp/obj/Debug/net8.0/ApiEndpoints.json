@@ -1,8 +1,8 @@
 [
   {
-    "ContainingType": "TaskManagement.WebApp.Controllers.TasksController",
+    "ContainingType": "TaskManagement.WebApp.Controllers.TaskAPI",
     "Method": "GetAll",
-    "RelativePath": "api/Tasks",
+    "RelativePath": "api/tasks",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -10,25 +10,25 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "TaskManagement.WebApp.Controllers.TasksController",
+    "ContainingType": "TaskManagement.WebApp.Controllers.TaskAPI",
     "Method": "Create",
-    "RelativePath": "api/Tasks",
+    "RelativePath": "api/tasks",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "TaskManagement.WebApp.DTOs.CreateTaskDto",
+        "Type": "TaskManagement.Application.Features.Tasks.DTO.CreateProjectTaskDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "TaskManagement.WebApp.Controllers.TasksController",
+    "ContainingType": "TaskManagement.WebApp.Controllers.TaskAPI",
     "Method": "GetById",
-    "RelativePath": "api/Tasks/{id}",
+    "RelativePath": "api/tasks/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -42,9 +42,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "TaskManagement.WebApp.Controllers.TasksController",
+    "ContainingType": "TaskManagement.WebApp.Controllers.TaskAPI",
     "Method": "Update",
-    "RelativePath": "api/Tasks/{id}",
+    "RelativePath": "api/tasks/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -56,16 +56,16 @@
       },
       {
         "Name": "dto",
-        "Type": "TaskManagement.WebApp.DTOs.UpdateTaskDto",
+        "Type": "TaskManagement.Application.Features.Tasks.DTO.UpdateProjectTaskDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "TaskManagement.WebApp.Controllers.TasksController",
+    "ContainingType": "TaskManagement.WebApp.Controllers.TaskAPI",
     "Method": "Delete",
-    "RelativePath": "api/Tasks/{id}",
+    "RelativePath": "api/tasks/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,

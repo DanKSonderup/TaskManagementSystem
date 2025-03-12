@@ -27,7 +27,12 @@ namespace TaskManagement.Infrastructure.Repositories
 
         public async Task<ProjectTask> GetByIdAsync(Guid taskId)
         {
-            return await _context.ProjectTasks.FindAsync(taskId);
+            var result = await _context.ProjectTasks.FindAsync(taskId);
+            if (result == null)
+            {
+                throw new Exception("Task not found"); 
+            }
+            return result;
         }
 
         public async Task<IEnumerable<ProjectTask>> GetAllAsync()
@@ -37,8 +42,12 @@ namespace TaskManagement.Infrastructure.Repositories
 
         public async Task DeleteAsync(ProjectTask task)
         {
-            _context.ProjectTasks.Remove(task);
-            await _context.SaveChangesAsync();
+            var foundTask = await _context.ProjectTasks.FindAsync(task.Id);
+            if (foundTask != null)
+            {
+                _context.ProjectTasks.Remove(foundTask);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task<ProjectTask> UpdateAsync(ProjectTask task)

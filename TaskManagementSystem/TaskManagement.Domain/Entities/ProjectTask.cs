@@ -10,8 +10,10 @@ namespace TaskManagement.Domain.Entities
     public class ProjectTask
     {
         public Guid Id { get; set; }
-        public string? Title { get; set; }
-        public string? Description { get; set; }
+        public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public Guid DepartmentId { get; set; }
+        public virtual Department Department { get; set; }
         public TaskState State { get; private set; }
 
         public ProjectTask() 
@@ -19,12 +21,13 @@ namespace TaskManagement.Domain.Entities
             Id = Guid.NewGuid();
             State = TaskState.ToDo;
         }
-        public ProjectTask(string title, string description)
+        public ProjectTask(string title, string description, Department department)
         {
             Id = Guid.NewGuid();
             Title = title;
             Description = description;
             State = TaskState.ToDo;
+            Department = department;
         }
 
         public void MarkAsCompleted() => State = TaskState.Done;

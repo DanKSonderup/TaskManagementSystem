@@ -10,3 +10,4 @@ C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskMa
 C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.Shared\obj\Debug\net8.0\refint\TaskManagement.Shared.dll
 C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.Shared\obj\Debug\net8.0\TaskManagement.Shared.pdb
 C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.Shared\obj\Debug\net8.0\ref\TaskManagement.Shared.dll
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.Shared\obj\Debug\net8.0\TaskManagement.Shared.csproj.AssemblyReference.cache

@@ -1,56 +1,100 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using TaskManagement.Application.Interfaces;
-using TaskManagement.WebApp.DTOs;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using TaskManagement.Application.Features.Departments;
+using TaskManagement.Application.Features.Tasks;
+using TaskManagement.Application.Features.Tasks.DTO;
+using TaskManagement.Domain.Enums;
 
 namespace TaskManagement.WebApp.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class TasksController : ControllerBase
+    public class TasksController : Controller
     {
         private readonly ITaskService _taskService;
+        private readonly IDepartmentService _departmentService;
+        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IValidator<CreateProjectTaskDto> _createTaskValidator;
+        private readonly IValidator<UpdateProjectTaskDto> _updateTaskValidator;
 
-        public TasksController(ITaskService taskService)
+
+        public TasksController(ITaskService taskService, IHttpClientFactory httpClient, 
+            IDepartmentService departmentService, IValidator<CreateProjectTaskDto> createValidator,
+            IValidator<UpdateProjectTaskDto> updateValidator)
         {
             _taskService = taskService;
+            _httpClientFactory = httpClient;
+            _departmentService = departmentService;
+            _createTaskValidator = createValidator;
+            _updateTaskValidator = updateValidator;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> Index()
         {
             var tasks = await _taskService.GetAllTasksAsync();
-            return Ok(tasks);
+            return View(tasks);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid id)
+        public IActionResult Create()
         {
-            var task = await _taskService.GetTaskByIdAsync(id);
-            if (task == null) return NotFound();
-            return Ok(task);
+            return View();
+        }
+
+
+        // REMEMBER TO ADD VALIDATION
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateProjectTaskDto taskDto)
+        {
+            var validationResult = await _createTaskValidator.ValidateAsync(taskDto);
+
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+
+                var departments = await _departmentService.GetAllDepartmentsAsync();
+                ViewBag.Departments = new SelectList(departments, "Id", "Name");
+
+                return View(taskDto); 
+            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateTaskDto dto)
+        public async Task<IActionResult> UpdateStatus(Guid taskId, TaskState newStatus)
         {
-            var taskId = await _taskService.CreateTaskAsync(dto.Title, dto.Description);
-            return CreatedAtAction(nameof(GetById), new { id = taskId }, null);
+            var validationResult = await _updateTaskValidator.ValidateAsync(taskDto);
+
+            if (!validationResult.IsValid) return View(taskDto);
+
+            var task = await _taskService.GetTaskByIdAsync(taskId);
+            if(task == null)
+            {
+                return NotFound();
+            }
+
+            await _taskService.UpdateTaskAsync(task.Id, task.Title, task.Description, newStatus);
+            return RedirectToAction(nameof(Index));
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, [FromBody] UpdateTaskDto dto)
+        [HttpPost]
+        public async Task<IActionResult> Delete(Guid taskId)
         {
-            var result = await _taskService.UpdateTaskAsync(id, dto.Title, dto.Description, dto.Status);
-            if (!result) return NotFound();
-            return NoContent();
-        }
+            var client = _httpClientFactory.CreateClient("API");
+            var response = await client.DeleteAsync($"api/tasks/{taskId}");
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
-        {
-            var result = await _taskService.DeleteTaskAsync(id);
-            if (!result) return NotFound();
-            return NoContent();
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Failed to delete task");
+                return View();
+            }
         }
     }
 }

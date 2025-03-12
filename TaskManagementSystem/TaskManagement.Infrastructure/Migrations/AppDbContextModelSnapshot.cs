@@ -18,9 +18,39 @@ namespace TaskManagement.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.2")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("TaskManagement.Domain.Entities.Department", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111111"),
+                            Name = "IT"
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333333"),
+                            Name = "Sales"
+                        });
+                });
 
             modelBuilder.Entity("TaskManagement.Domain.Entities.ProjectTask", b =>
                 {
@@ -28,16 +58,23 @@ namespace TaskManagement.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("State")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("ProjectTasks");
 
@@ -45,6 +82,7 @@ namespace TaskManagement.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("11111111-1111-1111-1111-111111111111"),
+                            DepartmentId = new Guid("11111111-1111-1111-1111-111111111111"),
                             Description = "Set up initial database",
                             State = 0,
                             Title = "Create Database"
@@ -52,6 +90,7 @@ namespace TaskManagement.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("22222222-2222-2222-2222-222222222222"),
+                            DepartmentId = new Guid("11111111-1111-1111-1111-111111111111"),
                             Description = "Implement CRUD operations",
                             State = 0,
                             Title = "Implement CRUD"
@@ -59,10 +98,27 @@ namespace TaskManagement.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("33333333-3333-3333-3333-333333333333"),
-                            Description = "Test all API endpoints",
+                            DepartmentId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            Description = "Make Quarter PP",
                             State = 0,
-                            Title = "Test API"
+                            Title = "Make Powerpoint slide"
                         });
+                });
+
+            modelBuilder.Entity("TaskManagement.Domain.Entities.ProjectTask", b =>
+                {
+                    b.HasOne("TaskManagement.Domain.Entities.Department", "Department")
+                        .WithMany("ProjectTasks")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("TaskManagement.Domain.Entities.Department", b =>
+                {
+                    b.Navigation("ProjectTasks");
                 });
 #pragma warning restore 612, 618
         }

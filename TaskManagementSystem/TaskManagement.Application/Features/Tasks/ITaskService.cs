@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using TaskManagement.Domain.Entities;
 using TaskManagement.Domain.Enums;
 
-namespace TaskManagement.Application.Interfaces
+namespace TaskManagement.Application.Features.Tasks
 {
     public interface ITaskService
     {
-        Task<Guid> CreateTaskAsync(string title, string description);
+        Task<Guid> CreateTaskAsync(string title, string description, Department department);
         Task<IEnumerable<ProjectTask>> GetAllTasksAsync();
         Task<ProjectTask?> GetTaskByIdAsync(Guid taskId);
         Task<bool> UpdateTaskAsync(Guid taskId, string title, string description, TaskState status);

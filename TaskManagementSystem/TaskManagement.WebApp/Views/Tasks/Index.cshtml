@@ -1,0 +1,43 @@
+﻿@model IEnumerable<TaskManagement.Domain.Entities.ProjectTask>
+
+<h2 class="text-center">Kanban Task Board</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Create New Task</a>
+
+<div class="kanban-board">
+    @foreach (TaskManagement.Domain.Enums.TaskState state in Enum.GetValues(typeof(TaskManagement.Domain.Enums.TaskState)))
+    {
+        <div class="kanban-column">
+            <h3>@state</h3>
+            <div class="task-list">
+                @foreach (var task in Model.Where(t => t.State == state))
+                {
+                    <div class="kanban-card">
+                        <h4>@task.Title</h4>
+
+                        <p>@task.Description</p>
+
+                        <p class="department">@(task.Department?.Name ?? "Unassigned")</p>
+
+                        <form asp-action="UpdateStatus" method="post">
+                            <input type="hidden" name="taskId" value="@task.Id">
+                            <select name="newStatus" onchange="this.form.submit()">
+                                @foreach (var status in Enum.GetValues(typeof(TaskManagement.Domain.Enums.TaskState)))
+                                {
+                                    <option value="@status" selected="@(task.State == (TaskManagement.Domain.Enums.TaskState)status ? "selected" : null)">
+                                        @status
+                                    </option>
+                                }
+                            </select>
+                        </form>
+
+                        <form asp-action="Delete" method="post" class="actions">
+                            <input type="hidden" name="taskId" value="@task.Id">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>

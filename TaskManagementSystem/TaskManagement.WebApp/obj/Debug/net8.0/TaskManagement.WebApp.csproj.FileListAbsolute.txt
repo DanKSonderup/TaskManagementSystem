@@ -169,7 +169,6 @@ C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskMa
 C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.TaskManagement.WebApp.props
 C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.TaskManagement.WebApp.props
 C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\scopedcss\Pages\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\scopedcss\bundle\TaskManagement.WebApp.styles.css
 C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\scopedcss\projectbundle\TaskManagement.WebApp.bundle.scp.css
 C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\TaskMana.DB8BB95A.Up2Date
@@ -178,3 +177,9 @@ C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskMa
 C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\TaskManagement.WebApp.pdb
 C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\TaskManagement.WebApp.genruntimeconfig.cache
 C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\ref\TaskManagement.WebApp.dll
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\TaskManagement.WebApp.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\bin\Debug\net8.0\Castle.Core.dll
+C:\Users\danie\Documents\GitHub\TaskManagementSystem\TaskManagementSystem\TaskManagement.WebApp\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Proxies.dll

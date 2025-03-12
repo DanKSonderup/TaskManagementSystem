@@ -16,9 +16,9 @@ namespace TaskManagement.Application.Features.Tasks
         {
             _taskRepository = taskRepository;
         }
-        public async Task<Guid> CreateTaskAsync(string title, string description)
+        public async Task<Guid> CreateTaskAsync(string title, string description, Department department)
         {
-            ProjectTask task = new ProjectTask(title, description);
+            ProjectTask task = new ProjectTask(title, description, department);
             await _taskRepository.AddAsync(task);
             return task.Id;
         }

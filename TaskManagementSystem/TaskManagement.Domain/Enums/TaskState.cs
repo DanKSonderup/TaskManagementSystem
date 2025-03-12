@@ -10,6 +10,7 @@ namespace TaskManagement.Domain.Enums
     {
         ToDo,
         InProgress,
+        CodeReview,
         Done
     }
 }

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using TaskManagement.Application.Interfaces;
+using TaskManagement.Application.Features.Tasks;
 using TaskManagement.Domain.Entities;
 using TaskManagement.Domain.Enums;
 
@@ -9,10 +9,12 @@ namespace TaskManagement.WebApp.Pages.Tasks
     public class IndexModel : PageModel
     {
         private readonly ITaskService _taskService;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public IndexModel(ITaskService taskService)
+        public IndexModel(ITaskService taskService, IHttpClientFactory httpClient)
         {
             _taskService = taskService;
+            _httpClientFactory = httpClient;
         }
 
         public List<ProjectTask> Tasks { get; set; } = new();
@@ -28,7 +30,11 @@ namespace TaskManagement.WebApp.Pages.Tasks
         {
             if (!ModelState.IsValid) return Page();
 
-            await _taskService.CreateTaskAsync(NewTask.Title, NewTask.Description);
+            var client = _httpClientFactory.CreateClient("API");
+
+            var response = await client.PostAsJsonAsync("api/Tasks", NewTask);
+            if (!response.IsSuccessStatusCode) return Page();
+
             return RedirectToPage();
         }
 
