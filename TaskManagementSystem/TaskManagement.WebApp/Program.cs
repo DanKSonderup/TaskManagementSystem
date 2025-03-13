@@ -34,15 +34,16 @@ namespace TaskManagement.WebApp
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 
             // Application Layer Validators
-            builder.Services.AddTransient(typeof(IValidator<>), typeof(BaseProjectTaskDtoValidator<>));
+
+            // Vi bruger Transient fordi vi gerne vil have en ny instans af vores validator hver gang vi skal bruge den (Hver request)
             builder.Services.AddTransient<IValidator<DepartmentDto>, DepartmentValidator>();
+            builder.Services.AddTransient<IValidator<CreateProjectTaskDto>, CreateTaskValidator>();
+            builder.Services.AddTransient<IValidator<UpdateProjectTaskDto>, UpdateTaskValidator>();
 
             // Register Infrastructure Layer Repositories
             builder.Services.AddScoped<ITaskRepository, TaskRepository>();
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
-
-            // Configure EF Core with SQL Server
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
                     builder.Configuration.GetConnectionString("DefaultConnection")).UseLazyLoadingProxies());
@@ -52,7 +53,7 @@ namespace TaskManagement.WebApp
             using (var scope = app.Services.CreateScope())
             {
                 var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-                dbContext.Database.Migrate(); // Applies any pending migrations
+                dbContext.Database.Migrate();
             }
 
             app.UseExceptionHandler("/Error");

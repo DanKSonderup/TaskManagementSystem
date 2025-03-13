@@ -14,19 +14,27 @@ namespace TaskManagement.Infrastructure.Repositories
     public class DepartmentRepository : IDepartmentRepository
     {
         private readonly AppDbContext _context;
+
+        public DepartmentRepository(AppDbContext context)
+        {
+            _context = context;
+        }
+
         public async Task AddAsync(Department department)
         {
             await _context.Departments.AddAsync(department);
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Department department)
+        public async Task<bool> DeleteAsync(Department department)
         {
             var foundDepartment = await _context.Departments.FindAsync(department.Id);
             if (foundDepartment != null) {
                 _context.Departments.Remove(foundDepartment);
                 await _context.SaveChangesAsync();
+                return true;
             }
+            return false;
         }
 
         public Task<IEnumerable<Department>> GetAllAsync()
@@ -43,9 +51,9 @@ namespace TaskManagement.Infrastructure.Repositories
             }).ToListAsync();
         }
 
-        public Task<Department> GetByIdAsync(Guid departmentId)
+        public async Task<Department?> GetByIdAsync(Guid departmentId)
         {
-            throw new NotImplementedException();
+            return await _context.Departments.FindAsync(departmentId);
         }
 
         public Task<Department> UpdateAsync(Department department)

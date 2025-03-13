@@ -45,7 +45,7 @@ namespace TaskManagement.WebApp.Controllers
                 return BadRequest(result.Errors);
             }
 
-            var taskId = await _taskService.CreateTaskAsync(dto.Title, dto.Description, dto.Department ?? new Department { Id = Guid.NewGuid(), Name = "Unknown"});
+            var taskId = await _taskService.CreateTaskAsync(dto);
             return CreatedAtAction(nameof(GetById), new { id = taskId }, null);
         }
 

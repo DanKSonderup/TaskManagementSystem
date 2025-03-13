@@ -1,4 +1,4 @@
-﻿@model CreateProjectTaskDto
+﻿@model TaskManagement.Application.Features.Tasks.DTO.CreateProjectTaskDto
 
 <h2>Create New Task</h2>
 
@@ -8,22 +8,30 @@
     <div class="form-group">
         <label>Title</label>
         <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span> <!-- ✅ Show error -->
+        <span asp-validation-for="Title" class="text-danger"></span> 
     </div>
 
     <div class="form-group">
         <label>Description</label>
         <textarea asp-for="Description" class="form-control"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span> <!-- ✅ Show error -->
+        <span asp-validation-for="Description" class="text-danger"></span> 
     </div>
 
     <div class="form-group">
         <label>Department</label>
-        <select asp-for="DepartmentId" class="form-control" asp-items="ViewBag.Departments">
+        <select asp-for="DepartmentId" class="form-control" asp-items="ViewBag.Departments" onchange="updateDepartmentName(this)">
             <option value="">-- Select Department --</option>
         </select>
-        <span asp-validation-for="DepartmentId" class="text-danger"></span> <!-- ✅ Show error -->
+        <input type="hidden" id="DepartmentName" name="DepartmentName" />
+        <span asp-validation-for="DepartmentId" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-success">Create</button>
 </form>
+
+<script>
+    function updateDepartmentName(select) {
+        var selectedOption = select.options[select.selectedIndex];
+        document.getElementById("DepartmentName").value = selectedOption.text;
+    }
+</script>

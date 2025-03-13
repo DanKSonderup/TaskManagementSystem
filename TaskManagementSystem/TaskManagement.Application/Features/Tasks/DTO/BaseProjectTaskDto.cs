@@ -11,6 +11,11 @@ namespace TaskManagement.Application.Features.Tasks.DTO
     {
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-        public Department? Department { get; set; }
+        public string? DepartmentName { get; set; }
+        public Guid DepartmentId { get; set; }
+
+        public BaseProjectTaskDto()
+        {
+        }
     }
 }

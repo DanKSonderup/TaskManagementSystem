@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using TaskManagement.Application.Features.Departments;
 using TaskManagement.Application.Features.Tasks;
 using TaskManagement.Application.Features.Tasks.DTO;
+using TaskManagement.Domain.Entities;
 using TaskManagement.Domain.Enums;
 
 namespace TaskManagement.WebApp.Controllers
@@ -35,8 +36,10 @@ namespace TaskManagement.WebApp.Controllers
             return View(tasks);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var departments = await _departmentService.GetAllDepartmentsAsync();
+            ViewBag.Departments = new SelectList(departments, "Id", "Name");
             return View();
         }
 
@@ -60,23 +63,34 @@ namespace TaskManagement.WebApp.Controllers
                 return View(taskDto); 
             }
 
+            var createdTask = await _taskService.CreateTaskAsync(taskDto);
+            if (createdTask == null)
+            {
+                return BadRequest();
+            }
+
             return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateStatus(Guid taskId, TaskState newStatus)
+        public async Task<IActionResult> UpdateStatus(UpdateProjectTaskDto dto)
         {
-            var validationResult = await _updateTaskValidator.ValidateAsync(taskDto);
+            var task = await _taskService.GetTaskByIdAsync(dto.TaskId);
+            if (task == null) return NotFound();
 
-            if (!validationResult.IsValid) return View(taskDto);
+            // Vi tjekker ikke om Department findes fordi vi mangler metode til at hente et specifikt department
 
-            var task = await _taskService.GetTaskByIdAsync(taskId);
-            if(task == null)
+            var validationResult = await _updateTaskValidator.ValidateAsync(dto);
+            if (!validationResult.IsValid)
             {
-                return NotFound();
+                foreach (var error in validationResult.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+                return BadRequest(ModelState);
             }
 
-            await _taskService.UpdateTaskAsync(task.Id, task.Title, task.Description, newStatus);
+            await _taskService.UpdateTaskAsync(task.Id, task.Title, task.Description, dto.Status);
             return RedirectToAction(nameof(Index));
         }
 

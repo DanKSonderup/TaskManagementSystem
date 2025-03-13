@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +11,19 @@ using TaskManagement.Domain.Enums;
 
 namespace TaskManagement.Application.Features.Tasks.Validators
 {
-    public class UpdateTaskValidator: BaseProjectTaskDtoValidator<UpdateProjectTaskDto>
+    public class UpdateTaskValidator: AbstractValidator<UpdateProjectTaskDto>
     {
-        
-        public UpdateTaskValidator() 
-        { 
-            RuleFor(x => x.Status).NotNull().WithMessage("Status is required");
 
-            RuleFor(x => x.Department).NotNull().WithMessage("Department is required");
+        public UpdateTaskValidator()
+        {
+            RuleFor(x => x.Status)
+                .NotNull().WithMessage("Status is required");
 
-            When(x => (x.Department?.Name ?? string.Empty) != "IT", () => {
+            RuleFor(x => x.TaskId)
+                .NotEmpty().WithMessage("Task ID is required");
+
+            When(x => (x.DepartmentName ?? string.Empty) != "IT", () =>
+            {
                 RuleFor(x => x.Status)
                     .NotEqual(TaskState.CodeReview)
                     .WithMessage("CodeReview is only allowed for the IT department.");

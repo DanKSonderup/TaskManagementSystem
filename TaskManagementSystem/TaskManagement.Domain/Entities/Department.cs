@@ -11,5 +11,14 @@ namespace TaskManagement.Domain.Entities
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public virtual List<ProjectTask> ProjectTasks { get; set; } = [];
+
+        public Department()
+        {
+        }
+        public Department(string name)
+        {
+            Name = name;
+            Id = Guid.NewGuid();
+        }
     }
 }

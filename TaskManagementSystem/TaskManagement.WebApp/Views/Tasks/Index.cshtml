@@ -21,7 +21,9 @@
 
                         <form asp-action="UpdateStatus" method="post">
                             <input type="hidden" name="taskId" value="@task.Id">
-                            <select name="newStatus" onchange="this.form.submit()">
+                            <input type="hidden" name="DepartmentId" value="@task.Department?.Id">
+                            <input type="hidden" name="DepartmentName" value="@task.Department?.Name">
+                            <select name="Status" onchange="this.form.submit()">
                                 @foreach (var status in Enum.GetValues(typeof(TaskManagement.Domain.Enums.TaskState)))
                                 {
                                     <option value="@status" selected="@(task.State == (TaskManagement.Domain.Enums.TaskState)status ? "selected" : null)">

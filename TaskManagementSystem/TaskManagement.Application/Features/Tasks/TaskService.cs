@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManagement.Application.Features.Tasks.DTO;
 using TaskManagement.Application.Interfaces;
 using TaskManagement.Domain.Entities;
 using TaskManagement.Domain.Enums;
@@ -16,11 +18,23 @@ namespace TaskManagement.Application.Features.Tasks
         {
             _taskRepository = taskRepository;
         }
-        public async Task<Guid> CreateTaskAsync(string title, string description, Department department)
+        public async Task<ProjectTask?> CreateTaskAsync(CreateProjectTaskDto dto)
         {
-            ProjectTask task = new ProjectTask(title, description, department);
+            var department = await _taskRepository.GetByIdAsync(dto.DepartmentId);
+            if (department == null)
+            {
+                return null;
+            }
+
+            var task = new ProjectTask
+            {
+                Id = Guid.NewGuid(),
+                Title = dto.Title,
+                Description = dto.Description,
+                DepartmentId = dto.DepartmentId,
+            };
             await _taskRepository.AddAsync(task);
-            return task.Id;
+            return task;
         }
 
         public Task<bool> DeleteTaskAsync(Guid taskId)

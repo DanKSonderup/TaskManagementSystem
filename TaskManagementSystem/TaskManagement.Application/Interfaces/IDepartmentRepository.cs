@@ -12,9 +12,9 @@ namespace TaskManagement.Application.Interfaces
     {
         public Task AddAsync(Department department);
         public Task<List<DepartmentDto>> GetAllDepartmentsAsync();
-        public Task<Department> GetByIdAsync(Guid departmentId);
+        public Task<Department?> GetByIdAsync(Guid departmentId);
         public Task<Department> UpdateAsync(Department department);
         public Task<IEnumerable<Department>> GetAllAsync();
-        public Task DeleteAsync(Department department);
+        public Task<bool> DeleteAsync(Department department);
     }
 }
